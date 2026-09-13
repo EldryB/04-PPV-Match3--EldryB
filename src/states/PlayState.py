@@ -177,6 +177,7 @@ class PlayState(BaseState):
 
                             explosion = [tile1] + self.board.get_powerup_effect(tile1)
                             self.board.matches.append(explosion)
+                            self.score += len(explosion) * 50
                             
 
                             settings.SOUNDS["match"].stop()
@@ -195,6 +196,7 @@ class PlayState(BaseState):
                         return
                     
                     elif 0 <= i < settings.BOARD_HEIGHT and 0 <= j < settings.BOARD_WIDTH and di <= 1 and dj <= 1 and di != dj:
+                        
                         self.active = False
                         tile2 = self.board.tiles[i][j]
                         
@@ -211,7 +213,7 @@ class PlayState(BaseState):
                         
                         original_x = self.start_j * settings.TILE_SIZE
                         original_y = self.start_i * settings.TILE_SIZE
-
+                        
                         if matches is None:
                             (
                                 self.board.tiles[self.start_i][self.start_j],
@@ -231,16 +233,16 @@ class PlayState(BaseState):
                                 [(tile1, {"x": original_x, "y": original_y})],
                                 on_finish=restore_control
                             )
-
+                        
                         
                         else:
                             
                             self.dragged_tile = None
                             
                             def process_valid_move():
-                                self._calculate_matches([tile1, tile2], epicenter_i=i, epicenter_j=j)
+                               self._calculate_matches([tile1, tile2], epicenter_i=i, epicenter_j=j)
 
-
+                            
                             Timer.tween(
                                 0.25,
                                 [
@@ -249,6 +251,7 @@ class PlayState(BaseState):
                                 ],
                                 on_finish=process_valid_move
                             )
+                            
                             
                     else:
 
