@@ -168,7 +168,7 @@ class PlayState(BaseState):
 
                     tile1 = self.dragged_tile
 
-                    if di == 0 and dj == 0:#Click sobre un tale
+                    if di == 0 and dj == 0: # Click on a tile
                         if getattr(tile1, 'powerup', None) is not None:
 
                             self.active = False
@@ -295,7 +295,7 @@ class PlayState(BaseState):
             
             if len(extra_explosions) > 0:
                 self.board.matches.append(extra_explosions)
-                self.score += len(extra_explosions) * 50 #Puntaje extra por explosion
+                self.score += len(extra_explosions) * 50 # Extra score per explosion
             
             if len(match) >= 4:
                 p_type = "bomb" if len(match) >= 5 else "line"
@@ -308,7 +308,7 @@ class PlayState(BaseState):
                         break
                         
                 spawn_tile.powerup = p_type
-                #Sacar el tile de match para que despues no sea destruida
+                # Remove the tile from the match so it is not destroyed later
                 match.remove(spawn_tile)
 
         settings.SOUNDS["match"].stop()

@@ -251,7 +251,7 @@ class Board:
     def get_powerup_effect(self, tile: Tile) -> List[Tile]:
         affected = []
         if tile.powerup == "line":
-            # Destruye toda la fila y toda la columna
+            # Destroys the entire row and column
             for k in range(settings.BOARD_WIDTH):
                 if self.tiles[tile.i][k] is not None: 
                     affected.append(self.tiles[tile.i][k])
@@ -260,7 +260,7 @@ class Board:
                     affected.append(self.tiles[k][tile.j])
                     
         elif tile.powerup == "bomb":
-            # Destruye todas las baldosas del mismo color en el tablero
+            # Destroys all tiles of the same color on the board
             for i in range(settings.BOARD_HEIGHT):
                 for j in range(settings.BOARD_WIDTH):
                     if self.tiles[i][j] is not None and self.tiles[i][j].color == tile.color:
